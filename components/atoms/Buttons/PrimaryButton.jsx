@@ -12,7 +12,7 @@ import { SppinerIcon } from '../Icons';
  * @returns React component
  */
 
-export const PrimaryButton = (props, ref) => {
+export const PrimaryButton = (props) => {
     const { type, className, widthClassName, loading, disabled, ...remaining } = props;
     const classes = ['flex',
         'items-center',
@@ -38,7 +38,7 @@ export const PrimaryButton = (props, ref) => {
     const { children } = props;
 
     return (
-        <button ref={ref} {...remaining} type={type || 'button'} className={classes.join(' ')} disabled={loading || disabled}>
+        <button  {...remaining} type={type || 'button'} className={classes.join(' ')} disabled={loading || disabled}>
             {loading ? <SppinerIcon /> : children}
         </button>
     );

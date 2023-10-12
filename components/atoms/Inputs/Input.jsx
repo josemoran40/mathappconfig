@@ -1,3 +1,5 @@
+"use client"
+import React from "react";
 
 export const Input = (props) => {
     const {
@@ -40,7 +42,7 @@ export const Input = (props) => {
                     ${icon ? "pl-8" : ""}`}
                     placeholder={placeholder}
                     value={value}
-                    disabled={disabled}
+                    {...rest}
                 />
             ) : (
                 <textarea
@@ -67,3 +69,4 @@ export const Input = (props) => {
         </div>
     );
 };
+
