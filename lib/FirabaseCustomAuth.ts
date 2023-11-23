@@ -12,6 +12,7 @@ export default class FirebaseCustomAuth {
       this.firebase = new FirebaseInit();
     }
     this.firebase.createFirebaseAdminApp();
+    this.firebase.createFirebaseApp();
   }
 
   public async isAuthenticated(req: NextApiRequest) {
