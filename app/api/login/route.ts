@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import FirebaseInit from "../../../lib/firebaseInit";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const firebase = new FirebaseInit();
 
@@ -15,11 +16,23 @@ export async function POST(request: Request) {
       res.email,
       res.password
     );
+
     const token = await result.user.getIdToken();
-    return NextResponse.json({
-      email: res.email,
-      token,
-    });
+    const db = await getFirestore();
+    const document = doc(db, "users/" + result.user.uid);
+    const docSnap = await getDoc(document);
+
+    if (docSnap.exists() && docSnap.data().role === "teacher") {
+      return NextResponse.json({
+        email: res.email,
+        token,
+        uid: result.user.uid,
+      });
+    } else {
+      return new Response("Usuario no encontrado", {
+        status: 401,
+      });
+    }
   } catch (error) {
     if (
       error instanceof FirebaseError &&

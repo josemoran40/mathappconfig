@@ -15,14 +15,14 @@ export default class FirebaseCustomAuth {
     this.firebase.createFirebaseApp();
   }
 
-  public async isAuthenticated(req: NextApiRequest) {
+  public async isAuthenticated(req: any) {
     // @ts-ignore
     const token = req.headers.get("Authorization") || "";
     const decodedToken = await firebaseAdmin
       .auth()
       .verifyIdToken(token.split(" ")[1]);
     if (!decodedToken || !decodedToken.uid) {
-      return new Response("Usuario no encontrado", {
+      throw new Response("Usuario no encontrado", {
         status: 401,
       });
     }
