@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { SppinerIcon } from '../Icons';
+import { SpinnerIcon } from '../Icons';
 
 /**
  * Button is a visual atom.
@@ -39,7 +39,7 @@ export const PrimaryButton = (props) => {
 
     return (
         <button  {...remaining} type={type || 'button'} className={classes.join(' ')} disabled={loading || disabled}>
-            {loading ? <SppinerIcon /> : children}
+            {loading ? <SpinnerIcon /> : children}
         </button>
     );
 };

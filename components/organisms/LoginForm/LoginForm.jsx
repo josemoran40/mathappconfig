@@ -3,11 +3,13 @@ import { useState } from "react";
 import { Container, H1, PrimaryButton, Input } from "../../atoms"
 import { toast } from 'react-toastify';
 import axios from "../../../axios";
+import { useRouter } from 'next/navigation'
 
 export const LoginForm = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const router = useRouter();
 
     const login = async () => {
         axios.post("/api/login", { email, password }, {
@@ -17,6 +19,8 @@ export const LoginForm = () => {
         }).then(response => {
             localStorage.setItem("token", response.data.token)
             toast.success("Inicio de sesión exitoso")
+            router.push("/class")
+
         }).catch(error => {
             console.log(error)
             toast.error("Usuario o contraseña incorrectos")

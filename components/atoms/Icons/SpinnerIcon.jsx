@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const SppinerIcon = (props) => {
+export const SpinnerIcon = (props) => {
     const { className, ...remaining } = props;
     return (
         <svg
