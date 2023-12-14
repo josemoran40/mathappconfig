@@ -1,9 +1,9 @@
 
 import React from "react";
 
-export function Box({ children, className="", hover=true, ...remaing }) {
+export function Box({ children, className = "", hover = true }) {
     return (
-        <div {...remaing} className={`bg-white flex p-5 flex-1 rounded-md ${className} ${hover&&"hover:opacity-50 "} transition-all`}>
+        <div className={`bg-white flex p-5 flex-1 rounded-md ${className} ${hover && "hover:opacity-50 "} transition-all`}>
             {children}
         </div>
     );
