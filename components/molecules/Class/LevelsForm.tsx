@@ -1,10 +1,29 @@
 "use client";
 import React from "react";
-import { Box, DnD, PlusIcon } from "../../atoms";
+import { Box, DnD, Input, PlusIcon } from "../../atoms";
 
 export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
-  const drawLevels = ({ level }) => {
-    return <Box>{level}</Box>;
+  const drawLevels = ({ level, options }) => {
+    return (
+      <Box className="flex flex-col gap-3 w-full" hover={false}>
+        {level}
+        <Input placeholder="Nivel 1" className="w-full" />{" "}
+        <DnD
+          droppableId={"options" + level.level}
+          box={({ value, answer }) => (
+            <div
+              className={`p-1 rounded-sm ${
+                answer ? "bg-green-600 text-white" : ""
+              }`}
+            >
+              {value}
+            </div>
+          )}
+          updateItems={() => console.log("update")}
+          items={options}
+        />
+      </Box>
+    );
   };
 
   const addLevel = () => {

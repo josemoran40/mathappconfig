@@ -37,11 +37,12 @@ export const Input = (props) => {
                             ? "!border-green-success"
                             : "!border-red-error")
                         }
-                    ${disabled ? "bg-black" : "bg-white"}
+                    ${disabled && "opacity-70 cursor-not-allowed"}
                     ${capitalize ? "capitalize" : ""}
                     ${icon ? "pl-8" : ""}`}
                     placeholder={placeholder}
                     value={value}
+                    disabled={disabled}
                     {...rest}
                 />
             ) : (

@@ -100,12 +100,17 @@ export const ClassForm = () => {
         "w-full py-10 px-10 gap-4 flex justify-center flex-col items-center min-h-full"
       }
     >
-      <H1>Level name</H1>
+      <H1>{classDefault.class}</H1>
       <Input
+        label={"Class name"}
         onChange={(e) => console.log(e.target.value)}
-        placeholder={"teacher email"}
+        value={classDefault.class}
+        placeholder={"Class name"}
       />
       <Input
+        label={"Teacher email"}
+        disabled={true}
+        value={classDefault.teacherEmail}
         onChange={(e) => console.log(e.target.value)}
         placeholder={"teacher email"}
       />
