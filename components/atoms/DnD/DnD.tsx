@@ -1,5 +1,11 @@
 "use client";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { use, useEffect } from "react";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  resetServerContext,
+} from "react-beautiful-dnd";
 
 export const DnD = ({
   items,
@@ -7,6 +13,7 @@ export const DnD = ({
   droppableId,
   gap = "gap-4",
   box,
+  customKey,
 }) => {
   function handleOnDragEnd(result) {
     if (!result.destination) return;
@@ -14,9 +21,12 @@ export const DnD = ({
     const itemsCopy = Array.from(items);
     const [reorderedItem] = itemsCopy.splice(result.source.index, 1);
     itemsCopy.splice(result.destination.index, 0, reorderedItem);
-
     updateItems(itemsCopy);
   }
+
+  useEffect(() => {
+    resetServerContext();
+  }, []);
 
   return (
     <>
@@ -31,7 +41,9 @@ export const DnD = ({
               {items.map((item, index) => {
                 return (
                   <Draggable
-                    key={`${droppableId}_${index}`}
+                    key={`${droppableId}_${
+                      customKey ? item[customKey]?.replace(" ", "") : ""
+                    }_${index}`}
                     draggableId={`${droppableId}_${index}`}
                     index={index}
                   >
@@ -42,7 +54,7 @@ export const DnD = ({
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        {box(item)}
+                        {box(item, index)}
                       </div>
                     )}
                   </Draggable>

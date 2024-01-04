@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Container, H1, Input } from "../../atoms";
-import { LevelsForm } from "../../molecules";
+import { ExplanationForm, LevelsForm } from "../../molecules";
 import { useRouter } from "next/navigation";
 
 export const ClassForm = () => {
@@ -38,7 +38,7 @@ export const ClassForm = () => {
             answer: false,
           },
         ],
-        color: "#3498DB",
+        color: "#9EBB1C",
         clues: ["x+1", "y+1", "x+y"],
       },
       {
@@ -93,6 +93,11 @@ export const ClassForm = () => {
   };
 
   const [levels, setLevels] = useState(classDefault.levels);
+  const [explanation, setExplanation] = useState(classDefault.explanation);
+
+  useEffect(() => {
+    console.log("explanation", explanation);
+  }, [explanation]);
 
   return (
     <Container
@@ -113,6 +118,10 @@ export const ClassForm = () => {
         value={classDefault.teacherEmail}
         onChange={(e) => console.log(e.target.value)}
         placeholder={"teacher email"}
+      />
+      <ExplanationForm
+        explanation={explanation}
+        setExplanation={setExplanation}
       />
       <LevelsForm levels={levels} setLevels={setLevels} />
     </Container>
