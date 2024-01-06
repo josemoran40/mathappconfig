@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export function Layout({ children, className }) {
   return (
-    <div className={`w-screen min-h-screen bg-gray-primary`}>
+    <div className={`w-max-screen min-h-screen bg-gray-primary`}>
       <Navbar />
       <div className={`container mx-auto px-2 py-8 ${className} flex flex-col justify-center items-center min-h-full`}>{children} </div>
     </div>
