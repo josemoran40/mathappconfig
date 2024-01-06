@@ -1,0 +1,3 @@
+interface Explanation {
+  text: string;
+}

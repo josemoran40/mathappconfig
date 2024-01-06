@@ -16,5 +16,15 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      window.location.replace("/login");
+    }
+    return Promise.reject(error);
+  }
+);
 export default instance;

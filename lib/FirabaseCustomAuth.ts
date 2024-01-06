@@ -17,16 +17,22 @@ export default class FirebaseCustomAuth {
 
   public async isAuthenticated(req: any) {
     // @ts-ignore
-    const token = req.headers.get("Authorization") || "";
-    const decodedToken = await firebaseAdmin
-      .auth()
-      .verifyIdToken(token.split(" ")[1]);
-    if (!decodedToken || !decodedToken.uid) {
-      throw new Response("Usuario no encontrado", {
+    try {
+      const token = req.headers.get("Authorization") || "";
+      const decodedToken = await firebaseAdmin
+        .auth()
+        .verifyIdToken(token.split(" ")[1]);
+      if (!decodedToken || !decodedToken.uid) {
+        throw new Response("Usuario no encontrado", {
+          status: 401,
+        });
+      }
+      return decodedToken;
+    } catch (error) {
+      throw new Response("Sesion expirada", {
         status: 401,
       });
     }
-    return decodedToken;
   }
 
   public static getInstance(): FirebaseCustomAuth {

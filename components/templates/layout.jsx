@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar } from '../molecules';
+import "react-toastify/dist/ReactToastify.css";
 
 export function Layout({ children, className }) {
   return (
