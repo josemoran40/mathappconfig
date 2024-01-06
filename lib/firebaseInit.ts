@@ -1,6 +1,10 @@
 import * as firebase from "firebase/app";
 import * as firebaseAdmin from "firebase-admin";
-const serviceAccount = require("cert.json");
+const serviceAccount: firebaseAdmin.ServiceAccount = {
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  privateKey: process.env.FIREBASE_PRIVATE_KEY,
+  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+};
 export default class FirebaseInit {
   public createFirebaseApp() {
     firebase.initializeApp({
