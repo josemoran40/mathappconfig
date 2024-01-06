@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { DnD, H2, SaveIcon } from "../../atoms";
+import { DragAndDrop, H2, SaveIcon } from "../../atoms";
 
 const Box = dynamic(() => import("../../atoms/").then((module) => module.Box));
 const Input = dynamic(() =>
@@ -57,7 +57,7 @@ export function ExplanationForm({
 
           <PlusIcon className="h-5" onClick={addExplanationText}></PlusIcon>
         </div>
-        <DnD
+        <DragAndDrop
           droppableId={"explanation"}
           box={drawExplanationText}
           updateItems={setExplanation}

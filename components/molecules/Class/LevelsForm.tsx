@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { DnD, H2 } from "../../atoms";
+import { DragAndDrop, H2 } from "../../atoms";
 
 const Box = dynamic(() => import("../../atoms/").then((module) => module.Box));
 const Input = dynamic(() =>
@@ -90,7 +90,7 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
 
           <PlusIcon className="h-5" onClick={addLevel}></PlusIcon>
         </div>
-        <DnD
+        <DragAndDrop
           droppableId={"levels"}
           box={drawLevels}
           updateItems={setLevels}

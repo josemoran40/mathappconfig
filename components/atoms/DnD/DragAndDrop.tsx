@@ -7,7 +7,7 @@ import {
   resetServerContext,
 } from "react-beautiful-dnd";
 
-export const DnD = ({
+export const DragAndDrop = ({
   items,
   updateItems,
   droppableId,
