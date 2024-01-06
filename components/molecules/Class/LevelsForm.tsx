@@ -12,23 +12,34 @@ const PlusIcon = dynamic(() =>
 );
 
 export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
-  const drawLevels = ({ level, options, color }, index) => {
+  const drawLevels = ({ level, options, color, problem }, index) => {
     const [level_, setLevel_] = useState(level);
     const [color_, setColor_] = useState(color);
     const [options_, setOptions_] = useState(options);
+    const [problem_, setProblem_] = useState(problem);
     return (
-      <Box className="flex flex-col gap-5 w-full bg-lime-400" hover={false}>
+      <Box
+        className="flex flex-col gap-5 w-full !bg-gray-primary"
+        hover={false}
+      >
         <div className="flex gap-3 justify-between">
           <Input
-            className="max-w-sm"
             value={level_}
             onChange={(e) => setLevel_(e.target.value)}
-            placeholder={"Nombre de nivel"}
-            label={"Nombre de nivel"}
+            placeholder={"Descripción"}
+            label={"Descripción"}
+          />
+        </div>
+        <div className="flex gap-3 justify-between">
+          <Input
+            value={problem_}
+            onChange={(e) => setLevel_(e.target.value)}
+            placeholder={"Problema"}
+            label={"Problema"}
           />
           <Input
-            className="w-6"
-            classNameInput="py-0 px-0"
+            className=""
+            classNameInput="!py-0 !px-0 h-9"
             type="color"
             label="Color"
             value={color_}
@@ -74,7 +85,11 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
   return (
     <>
       <Box className="w-full flex justify-center flex-col gap-4" hover={false}>
-        <H2>Nivel</H2>
+        <div className="flex w-full gap-5 justify-between">
+          <H2>Niveles</H2>
+
+          <PlusIcon className="h-5" onClick={addLevel}></PlusIcon>
+        </div>
         <DnD
           droppableId={"levels"}
           box={drawLevels}
@@ -83,9 +98,6 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
           gap={gap}
           customKey={"level"}
         />
-        <Box className="w-full flex justify-center">
-          <PlusIcon className="h-10" onClick={addLevel}></PlusIcon>
-        </Box>
       </Box>
     </>
   );

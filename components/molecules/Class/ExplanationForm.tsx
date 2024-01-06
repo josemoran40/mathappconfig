@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { DnD, H2 } from "../../atoms";
+import { DnD, H2, SaveIcon } from "../../atoms";
 
 const Box = dynamic(() => import("../../atoms/").then((module) => module.Box));
 const Input = dynamic(() =>
@@ -20,7 +20,7 @@ export function ExplanationForm({
     const [text_, setText_] = useState(text);
     return (
       <Box
-        className="flex justify-center items-center gap-3 w-full bg-blue-300"
+        className="flex justify-center items-center gap-3 w-full !bg-gray-primary"
         hover={false}
       >
         <Input
@@ -29,10 +29,10 @@ export function ExplanationForm({
           value={text_}
           onChange={(e) => setText_(e.target.value)}
         />
-        <PlusIcon
+        <SaveIcon
           className="h-5 cursor-pointer hover:opacity-50 transition-all"
           onClick={() => updateText(index, text_)}
-        ></PlusIcon>
+        ></SaveIcon>
       </Box>
     );
   };
@@ -52,7 +52,11 @@ export function ExplanationForm({
   return (
     <>
       <Box className="w-full flex justify-center flex-col gap-3" hover={false}>
-        <H2>Explicación</H2>
+        <div className="flex w-full gap-5 justify-between">
+          <H2>Explicación</H2>
+
+          <PlusIcon className="h-5" onClick={addExplanationText}></PlusIcon>
+        </div>
         <DnD
           droppableId={"explanation"}
           box={drawExplanationText}
@@ -61,12 +65,7 @@ export function ExplanationForm({
           customKey={"text"}
           gap={gap}
         />
-        <Box className="w-full flex justify-center">
-          <PlusIcon className="h-10" onClick={addExplanationText}></PlusIcon>
-        </Box>
       </Box>
     </>
   );
 }
-
-// https://github.com/colbyfayock/my-final-space-characters/blob/master/src/App.js

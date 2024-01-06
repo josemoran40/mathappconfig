@@ -197,6 +197,7 @@ module.exports = {
         "custom-review": "calc(100vw - 4rem)",
       },
       maxWidth: {
+        "custom-50%": "50%",
         "custom-85%": "85%",
         "custom-90%": "90%",
         "custom-95%": "95%",

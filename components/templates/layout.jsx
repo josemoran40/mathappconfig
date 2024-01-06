@@ -6,7 +6,7 @@ export function Layout({ children, className }) {
   return (
     <div className={`w-max-screen min-h-screen bg-gray-primary`}>
       <Navbar />
-      <div className={`container mx-auto px-2 py-8 ${className} flex flex-col justify-center items-center min-h-full`}>{children} </div>
+      <div className={`max-w-5xl mx-auto px-2 py-8 ${className} flex flex-col justify-center items-center min-h-full`}>{children} </div>
     </div>
   );
 }

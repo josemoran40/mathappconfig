@@ -26,10 +26,17 @@ export const ClassList = () => {
         "w-full py-10 px-10 gap-4 flex justify-center flex-col items-center min-h-full"
       }
     >
-      <H1>Clases</H1>{" "}
+      <div className="flex w-full gap-5 justify-between items-center">
+        <H1>Clases</H1>
+
+        <PlusIcon
+          className="h-5 hover:opacity-50"
+          onClick={() => {}}
+        ></PlusIcon>
+      </div>
       <>
         {classes.length != 0 ? (
-          <div className="grid grid-cols-3 gap-5 w-full">
+          <div className="grid lg:grid-cols-3 gap-5 w-full">
             <>
               {classes.map((item, index) => {
                 return (
@@ -42,9 +49,6 @@ export const ClassList = () => {
                   </Box>
                 );
               })}
-              <Box className="justify-center hover:opacity-50">
-                <PlusIcon className="w-9" />
-              </Box>
             </>
           </div>
         ) : (

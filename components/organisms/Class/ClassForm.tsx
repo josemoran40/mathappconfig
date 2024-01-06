@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Container, Input, PrimaryButton, SpinnerIcon } from "../../atoms";
+import { Container, H1, Input, PrimaryButton, SpinnerIcon } from "../../atoms";
 import axios from "../../../axios";
 import { useRouter } from "next/navigation";
-import { EditOption } from "../../molecules";
+import { ExplanationForm, LevelsForm } from "../../molecules";
 
 export const ClassForm = ({ uid }) => {
   const router = useRouter();
@@ -37,28 +37,21 @@ export const ClassForm = ({ uid }) => {
         <>
           <Container
             className={
-              "w-full py-10 px-10 gap-4 flex justify-center flex-col items-center min-h-full"
+              "w-full lg:p-10 p-3 gap-4 flex justify-center flex-col items-center min-h-full"
             }
           >
-            <div className="w-full gap-5 flex flex-col items-end">
-              <Input
-                label={"Clase"}
-                onChange={(e) => setName(e.target.value)}
-                placeholder={"Nombre de la clase"}
-                value={class_.class}
-              />
-              <PrimaryButton>Guardar</PrimaryButton>
-            </div>
-          </Container>
-
-          <Container
-            className={
-              "w-full py-10 px-10 gap-4 flex justify-center flex-col items-center min-h-full"
-            }
-          >
-            {explanation.map((item, index) => {
-              return <EditOption className={""}>{item.text}</EditOption>;
-            })}
+            <H1>{class_.class}</H1>
+            <Input
+              label={"Class name"}
+              onChange={(e) => console.log(e.target.value)}
+              value={class_.class}
+              placeholder={"Class name"}
+            />
+            <ExplanationForm
+              explanation={explanation}
+              setExplanation={setExplanation}
+            />
+            <LevelsForm levels={levels} setLevels={setLevels} />
           </Container>
         </>
       ) : (
