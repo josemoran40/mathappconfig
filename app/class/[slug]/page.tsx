@@ -13,9 +13,3 @@ export default function Home({ params }: { params: { slug: string } }) {
     </Layout>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  resetServerContext();
-
-  return { props: { data: [] } };
-};
