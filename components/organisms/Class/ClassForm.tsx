@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Container, H1, Input, PrimaryButton, SpinnerIcon } from "../../atoms";
 import axios from "../../../axios";
 import { ExplanationForm, LevelsForm } from "../../molecules";
+import { toast } from "react-toastify";
 
 export const ClassForm = ({ uid_ }) => {
   const [class_, setClass_] = useState<ClassData | null>(null);
@@ -21,17 +22,21 @@ export const ClassForm = ({ uid_ }) => {
   }, []);
 
   const updateClass = () => {
+    const classUpdated: ClassData = {
+      ...class_,
+      levels: levels,
+      explanation: explanation,
+    };
+
     axios
-      .post("/api/class/" + uid_, {
-        ...class_,
-        levels: levels,
-        explanation: explanation,
-      })
+      .put("/api/class/" + uid_, classUpdated)
       .then((response) => {
         console.log(response);
+        toast.success("Clase actualizada");
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Error al actualizar la clase");
       });
   };
 

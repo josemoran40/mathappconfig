@@ -49,6 +49,7 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
           {options.map((option, indexOption) => {
             return (
               <Input
+                key={indexOption}
                 value={option?.value}
                 onChange={(e) =>
                   updateLevelProperty(
@@ -78,6 +79,7 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
             return (
               <div className="flex gap-3 items-center">
                 <Input
+                  key={indexClue}
                   value={clue}
                   onChange={(e) =>
                     updateLevelProperty(
@@ -91,7 +93,9 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
                 />
                 <DeleteIcon
                   className="h-5 hover:opacity-50 transition-all cursor-pointer"
-                  onClick={() => {}}
+                  onClick={() => {
+                    removeClue(index, indexClue);
+                  }}
                 ></DeleteIcon>
               </div>
             );
@@ -117,6 +121,12 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
     } else {
       newLevels[index][property] = value;
     }
+    setLevels(newLevels);
+  };
+
+  const removeClue = (index, indexClue) => {
+    const newLevels = [...levels];
+    newLevels[index].clues.splice(indexClue, 1);
     setLevels(newLevels);
   };
 
