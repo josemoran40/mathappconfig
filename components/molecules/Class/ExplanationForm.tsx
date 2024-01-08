@@ -16,7 +16,7 @@ export function ExplanationForm({
   setExplanation,
   gap = "gap-4",
 }) {
-  const drawExplanationText = ({ text }, index) => {
+  const DrawExplanationText = ({ text }, index) => {
     const [text_, setText_] = useState(text);
     return (
       <Box
@@ -59,7 +59,7 @@ export function ExplanationForm({
         </div>
         <DragAndDrop
           droppableId={"explanation"}
-          box={drawExplanationText}
+          box={DrawExplanationText}
           updateItems={setExplanation}
           items={explanation}
           customKey={"text"}

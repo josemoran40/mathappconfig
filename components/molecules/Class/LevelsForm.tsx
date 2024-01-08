@@ -12,7 +12,7 @@ const PlusIcon = dynamic(() =>
 );
 
 export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
-  const drawLevels = ({ level, options, color, problem }, index) => {
+  const DrawLevels = ({ level, options, color, problem }, index) => {
     const [level_, setLevel_] = useState(level);
     const [color_, setColor_] = useState(color);
     const [options_, setOptions_] = useState(options);
@@ -92,7 +92,7 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
         </div>
         <DragAndDrop
           droppableId={"levels"}
-          box={drawLevels}
+          box={DrawLevels}
           updateItems={setLevels}
           items={levels}
           gap={gap}

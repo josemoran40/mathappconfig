@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Container, H1, Input, PrimaryButton, SpinnerIcon } from "../../atoms";
+import { Container, H1, Input, SpinnerIcon } from "../../atoms";
 import axios from "../../../axios";
 import { useRouter } from "next/navigation";
 import { ExplanationForm, LevelsForm } from "../../molecules";
 
-export const ClassForm = ({ uid }) => {
+export const ClassForm = ({ uid_ }) => {
   const router = useRouter();
   const [class_, setClass_] = useState<ClassData | null>(null);
   const [name, setName] = useState("");
@@ -14,7 +14,7 @@ export const ClassForm = ({ uid }) => {
 
   useEffect(() => {
     axios
-      .get("/api/class/" + uid)
+      .get("/api/class/" + uid_)
       .then((response) => {
         setClass_(response.data);
       })
