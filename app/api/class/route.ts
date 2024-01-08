@@ -1,6 +1,6 @@
 import FirebaseCustomAuth from "../../../lib/FirabaseCustomAuth";
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import {
   getFirestore,
   doc,
@@ -13,7 +13,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextApiResponse) {
   try {
     const user = (await FirebaseCustomAuth.getInstance().isAuthenticated(
       req
@@ -44,7 +44,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest, res: NextApiResponse) {
   try {
     const user = (await FirebaseCustomAuth.getInstance().isAuthenticated(
       req

@@ -1,11 +1,10 @@
 import FirebaseCustomAuth from "../../../../../lib/FirabaseCustomAuth";
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
 export async function GET(
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
   try {
@@ -30,7 +29,7 @@ export async function GET(
 }
 
 export async function POST(
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
   try {
@@ -65,7 +64,7 @@ export async function POST(
 }
 
 export async function PUT(
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
   try {

@@ -1,10 +1,9 @@
 import FirebaseCustomAuth from "../../../../lib/FirabaseCustomAuth";
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 export async function GET(
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
   try {
