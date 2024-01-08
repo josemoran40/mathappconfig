@@ -26,7 +26,7 @@ export const PrimaryButton = (props) => {
         'font-semibold',
         'transition-all',
         'duration-300',
-        'rounded-sm',
+        'rounded-md',
         'focus-outline',
         'max-w-sm',
         'w-full lg:w-auto',

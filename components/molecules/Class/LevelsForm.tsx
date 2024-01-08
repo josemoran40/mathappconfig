@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { DragAndDrop, H2 } from "../../atoms";
+import { DeleteIcon, DragAndDrop, H2 } from "../../atoms";
 
 const Box = dynamic(() => import("../../atoms/").then((module) => module.Box));
 const Input = dynamic(() =>
@@ -12,20 +12,22 @@ const PlusIcon = dynamic(() =>
 );
 
 export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
-  const DrawLevels = ({ level, options, color, problem }, index) => {
+  const DrawLevels = ({ level, options, problem, clues }, index) => {
     const [level_, setLevel_] = useState(level);
-    const [color_, setColor_] = useState(color);
-    const [options_, setOptions_] = useState(options);
     const [problem_, setProblem_] = useState(problem);
     return (
       <Box
         className="flex flex-col gap-5 w-full !bg-gray-primary"
         hover={false}
       >
+        <H2>Nivel {index + 1}</H2>
         <div className="flex gap-3 justify-between">
           <Input
             value={level_}
-            onChange={(e) => setLevel_(e.target.value)}
+            onChange={(e) => {
+              setLevel_(e.target.value);
+              updateLevelProperty(index, e.target.value, "level");
+            }}
             placeholder={"Descripción"}
             label={"Descripción"}
           />
@@ -33,53 +35,98 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
         <div className="flex gap-3 justify-between">
           <Input
             value={problem_}
-            onChange={(e) => setLevel_(e.target.value)}
+            onChange={(e) => {
+              setProblem_(e.target.value);
+              updateLevelProperty(index, e.target.value, "problem");
+            }}
             placeholder={"Problema"}
             label={"Problema"}
           />
-          <Input
-            className=""
-            classNameInput="!py-0 !px-0 h-9"
-            type="color"
-            label="Color"
-            value={color_}
-            onChange={(e) => setColor_(e.target.value)}
-          />
         </div>
-        <div className="w-full border-t-1 border-black"></div>
+        <div className="w-full border-t-1 border-black opacity-30"></div>
+        <H2>Opciones</H2>
         <div className="grid grid-cols-2 gap-3">
-          <Input
-            value={options_[0]?.value}
-            onChange={(e) => setLevel_(e.target.value)}
-            placeholder={"Nombre de nivel"}
-            label={"Opción 1"}
-          />
-          <Input
-            value={options_[1]?.value}
-            onChange={(e) => setLevel_(e.target.value)}
-            placeholder={"Nombre de nivel"}
-            label={"Opción 2"}
-          />
-          <Input
-            value={options_[2]?.value}
-            onChange={(e) => setLevel_(e.target.value)}
-            placeholder={"Nombre de nivel"}
-            label={"Opción 3"}
-          />
-          <Input
-            value={options_[3]?.value}
-            onChange={(e) => setLevel_(e.target.value)}
-            placeholder={"Nombre de nivel"}
-            label={"Opción 4"}
-          />
+          {options.map((option, indexOption) => {
+            return (
+              <Input
+                value={option?.value}
+                onChange={(e) =>
+                  updateLevelProperty(
+                    index,
+                    e.target.value,
+                    "options",
+                    indexOption,
+                    "value"
+                  )
+                }
+                placeholder={"Nombre de nivel"}
+                label={`Opción ${index + 1}`}
+              />
+            );
+          })}
+        </div>
+        <div className="w-full border-t-1 border-black opacity-30"></div>
+        <div className="flex justify-between items-center">
+          <H2>Pistas</H2>
+          <PlusIcon
+            className="h-5 hover:opacity-50 transition-all cursor-pointer"
+            onClick={() => addClue(index, clues.length)}
+          ></PlusIcon>
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          {clues.map((clue, indexClue) => {
+            return (
+              <div className="flex gap-3 items-center">
+                <Input
+                  value={clue}
+                  onChange={(e) =>
+                    updateLevelProperty(
+                      index,
+                      e.target.value,
+                      "clues",
+                      indexClue
+                    )
+                  }
+                  placeholder={"Pista"}
+                />
+                <DeleteIcon
+                  className="h-5 hover:opacity-50 transition-all cursor-pointer"
+                  onClick={() => {}}
+                ></DeleteIcon>
+              </div>
+            );
+          })}
         </div>
       </Box>
     );
   };
 
+  const updateLevelProperty = (
+    index,
+    value,
+    property,
+    property2 = null,
+    property3 = null
+  ) => {
+    const newLevels = [...levels];
+    if (property3) {
+      newLevels[index][property][property2][property3] = value;
+    }
+    if (property2) {
+      newLevels[index][property][property2] = value;
+    } else {
+      newLevels[index][property] = value;
+    }
+    setLevels(newLevels);
+  };
+
   const addLevel = () => {
     const newLevels = [...levels, { level: "Factor comun 4" }];
     setLevels(newLevels);
+  };
+
+  const addClue = (index, length) => {
+    updateLevelProperty(index, "", "clues", length);
   };
 
   return (
@@ -88,7 +135,10 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
         <div className="flex w-full gap-5 justify-between">
           <H2>Niveles</H2>
 
-          <PlusIcon className="h-5" onClick={addLevel}></PlusIcon>
+          <PlusIcon
+            className="h-5 cursor-pointer"
+            onClick={addLevel}
+          ></PlusIcon>
         </div>
         <DragAndDrop
           droppableId={"levels"}
@@ -96,7 +146,7 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
           updateItems={setLevels}
           items={levels}
           gap={gap}
-          customKey={"level"}
+          customKey={"uid"}
         />
       </Box>
     </>

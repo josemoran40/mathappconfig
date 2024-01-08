@@ -4,4 +4,5 @@ interface Level {
   options: Option[];
   color: string;
   clues: string[];
+  uid: string;
 }

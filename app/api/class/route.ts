@@ -21,9 +21,15 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 
     const db = await getFirestore();
     //@ts-ignore
-    const body = await req.json();
+    const body: ClassData = await req.json();
     const uid = uuidv4();
     const document = doc(db, "class/" + uid);
+    for (const key of body.explanation) {
+      if (!key.uid) key.uid = uuidv4();
+    }
+    for (const key of body.levels) {
+      if (!key.uid) key.uid = uuidv4();
+    }
     const class_ = {
       ...body,
       teacher: user.uid,

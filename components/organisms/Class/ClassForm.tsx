@@ -1,14 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Container, H1, Input, SpinnerIcon } from "../../atoms";
+import { Container, H1, Input, PrimaryButton, SpinnerIcon } from "../../atoms";
 import axios from "../../../axios";
-import { useRouter } from "next/navigation";
 import { ExplanationForm, LevelsForm } from "../../molecules";
 
 export const ClassForm = ({ uid_ }) => {
-  const router = useRouter();
   const [class_, setClass_] = useState<ClassData | null>(null);
-  const [name, setName] = useState("");
   const [levels, setLevels] = useState<Level[]>([]);
   const [explanation, setExplanation] = useState<Explanation[]>([]);
 
@@ -23,16 +20,30 @@ export const ClassForm = ({ uid_ }) => {
       });
   }, []);
 
+  const updateClass = () => {
+    axios
+      .post("/api/class/" + uid_, {
+        ...class_,
+        levels: levels,
+        explanation: explanation,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (class_) {
-      setName(class_.class);
       setLevels(class_.levels);
       setExplanation(class_.explanation);
     }
   }, [class_]);
 
   return (
-    <div className="flex flex-col gap-8 w-full">
+    <div className="flex flex-col gap-4 w-full">
       {class_ ? (
         <>
           <Container
@@ -57,6 +68,11 @@ export const ClassForm = ({ uid_ }) => {
       ) : (
         <SpinnerIcon className="h-10" />
       )}
+      {class_ ? (
+        <div className="sticky w-fit bottom-4 left-full pr-2">
+          <PrimaryButton onClick={() => updateClass()}>Guardar</PrimaryButton>
+        </div>
+      ) : null}
     </div>
   );
 };

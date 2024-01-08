@@ -29,8 +29,8 @@ export const Input = (props) => {
                 <input
                     type={type}
                     className={`w-full form-input px-3 py-custom-7 border 
-                    border-gray-800 focus:border-accent
-                    placeholder:text-gray-750 rounded-sm text-sm outline-none 
+                    border-gray-200 focus:border-accent
+                    placeholder:text-gray-750 rounded-md text-sm outline-none 
                     ${classNameInput} 
                     ${errorMessage &&
                         (errorMessage == "success"

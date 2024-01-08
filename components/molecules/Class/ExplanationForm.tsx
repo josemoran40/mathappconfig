@@ -17,6 +17,7 @@ export function ExplanationForm({
   gap = "gap-4",
 }) {
   const DrawExplanationText = ({ text }, index) => {
+    console.log(text);
     const [text_, setText_] = useState(text);
     return (
       <Box
@@ -27,18 +28,16 @@ export function ExplanationForm({
           placeholder="Texto de explicación"
           className="w-full"
           value={text_}
-          onChange={(e) => setText_(e.target.value)}
+          onChange={(e) => {
+            setText_(e.target.value);
+            updateText(index, e.target.value);
+          }}
         />
-        <SaveIcon
-          className="h-5 cursor-pointer hover:opacity-50 transition-all"
-          onClick={() => updateText(index, text_)}
-        ></SaveIcon>
       </Box>
     );
   };
 
   const updateText = (index, text) => {
-    console.log(index, text);
     const newExplanation = [...explanation];
     newExplanation[index].text = text;
     setExplanation(newExplanation);
@@ -62,7 +61,7 @@ export function ExplanationForm({
           box={DrawExplanationText}
           updateItems={setExplanation}
           items={explanation}
-          customKey={"text"}
+          customKey={"uid"}
           gap={gap}
         />
       </Box>
