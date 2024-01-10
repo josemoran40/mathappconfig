@@ -87,9 +87,8 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
         <div className="grid grid-cols-3 gap-3">
           {clues.map((clue, indexClue) => {
             return (
-              <div className="flex gap-3 items-center">
+              <div className="flex gap-3 items-center" key={indexClue}>
                 <Input
-                  key={indexClue}
                   value={clue}
                   onChange={(e) =>
                     updateLevelProperty(
