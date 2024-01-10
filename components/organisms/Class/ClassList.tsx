@@ -1,24 +1,49 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Container, H1, Box, PlusIcon, SpinnerIcon } from "../../atoms";
+import {
+  Container,
+  H1,
+  Box,
+  PlusIcon,
+  SpinnerIcon,
+  DeleteIcon,
+} from "../../atoms";
 import axios from "../../../axios";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export const ClassList = () => {
   const router = useRouter();
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
+    getClasses();
+  }, []);
+
+  const deleteClass = (uid) => {
+    axios
+      .delete("/api/class/" + uid)
+      .then((response) => {
+        console.log(response);
+        toast.success("Clase eliminada");
+        getClasses();
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error al eliminar la clase");
+      });
+  };
+
+  const getClasses = () => {
     axios
       .get("/api/class")
       .then((response) => {
-        console.log(response.data);
         setClasses(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
 
   return (
     <Container
@@ -31,7 +56,9 @@ export const ClassList = () => {
 
         <PlusIcon
           className="h-5 hover:opacity-50"
-          onClick={() => {}}
+          onClick={() => {
+            router.push("/class/new");
+          }}
         ></PlusIcon>
       </div>
       <>
@@ -45,7 +72,13 @@ export const ClassList = () => {
                     className="hover:opacity-50"
                     onClick={() => router.push(`/class/${item.uid}`)}
                   >
-                    {item.class}
+                    <div className="flex justify-between w-full">
+                      {item.class}
+                      <DeleteIcon
+                        className="h-5 hover:opacity-50 transition-all cursor-pointer"
+                        onClick={() => deleteClass(item.uid)}
+                      ></DeleteIcon>
+                    </div>
                   </Box>
                 );
               })}

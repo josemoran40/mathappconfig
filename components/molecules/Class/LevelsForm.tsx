@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { DeleteIcon, DragAndDrop, H2 } from "../../atoms";
+import { v4 as uuidV4 } from "uuid";
 
 const Box = dynamic(() => import("../../atoms/").then((module) => module.Box));
 const Input = dynamic(() =>
@@ -10,6 +11,9 @@ const Input = dynamic(() =>
 const PlusIcon = dynamic(() =>
   import("../../atoms/").then((module) => module.PlusIcon)
 );
+
+import defaultClass from "../../../models/class.json";
+import { toast } from "react-toastify";
 
 export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
   const DrawLevels = ({ level, options, problem, clues }, index) => {
@@ -20,7 +24,13 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
         className="flex flex-col gap-5 w-full !bg-gray-primary"
         hover={false}
       >
-        <H2>Nivel {index + 1}</H2>
+        <div className="flex justify-between">
+          <H2>Nivel {index + 1}</H2>
+          <DeleteIcon
+            className="h-5 hover:opacity-50 transition-all cursor-pointer"
+            onClick={() => deleteLevel(index)}
+          ></DeleteIcon>
+        </div>
         <div className="flex gap-3 justify-between">
           <Input
             value={level_}
@@ -131,7 +141,16 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
   };
 
   const addLevel = () => {
-    const newLevels = [...levels, { level: "Factor comun 4" }];
+    defaultClass.levels[0].uid = uuidV4();
+    const newLevels = [...levels, defaultClass.levels[0]];
+    setLevels(newLevels);
+  };
+
+  const deleteLevel = (index) => {
+    if (levels.length == 1)
+      return toast.error("No puedes eliminar todos los niveles");
+    const newLevels = [...levels];
+    newLevels.splice(index, 1);
     setLevels(newLevels);
   };
 

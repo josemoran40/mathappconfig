@@ -1,18 +1,18 @@
 {
   "class": "General",
-  "teacherEmail": "ana@gmail.com",
+  "teacher": "",
+  "uid": "",
   "explanation": [
     {
-      "text": "El factor comun es 3"
-    },
-    {
-      "text": "La factorización por término común está ligada a una de las propiedades de los números reales"
+      "text": "La factorización por término común es una de las técnicas más sencillas para factorizar polinomios",
+      "uid": ""
     }
   ],
   "levels": [
     {
       "level": "Factor comun 1",
       "problem": "3y+6x",
+      "uid": "",
       "options": [
         {
           "answer": false,
@@ -32,67 +32,7 @@
         }
       ],
       "color": "#3498DB",
-      "clues": [
-        "x+1",
-        "y+1",
-        "x+y"
-      ]
-    },
-    {
-      "level": "Factor comun 2",
-      "problem": "3y+6x",
-      "options": [
-        {
-          "answer": false,
-          "value": "3(x+3y)"
-        },
-        {
-          "value": "3(2x+y)",
-          "answer": true
-        },
-        {
-          "value": "3(2x-y)",
-          "answer": false
-        },
-        {
-          "value": "3(x+2y)",
-          "answer": false
-        }
-      ],
-      "color": "#3498DB",
-      "clues": [
-        "x+1",
-        "y+1",
-        "x+y"
-      ]
-    },
-    {
-      "level": "Factor comun 3",
-      "problem": "3y+6x",
-      "options": [
-        {
-          "answer": false,
-          "value": "3(x+3y)"
-        },
-        {
-          "value": "3(2x+y)",
-          "answer": true
-        },
-        {
-          "value": "3(2x-y)",
-          "answer": false
-        },
-        {
-          "value": "3(x+2y)",
-          "answer": false
-        }
-      ],
-      "color": "#3498DB",
-      "clues": [
-        "x+1",
-        "y+1",
-        "x+y"
-      ]
+      "clues": []
     }
   ]
 }
