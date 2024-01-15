@@ -170,12 +170,9 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
   };
 
   const updateCorrectAnswer = (index, indexOption) => {
-    for (const item in levels[index].options) {
-      if (item == indexOption) {
-        console.log(levels[index].options[item].answer);
-        updateLevelProperty(index, 0, "options", indexOption, "answer");
-      }
-    }
+    const options = [...levels[index].options];
+    options[indexOption].answer = !options[indexOption].answer;
+    updateLevelProperty(index, options, "options");
   };
 
   return (
