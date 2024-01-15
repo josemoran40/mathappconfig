@@ -1,0 +1,31 @@
+classDiagram
+class Lección {
+  class: string
+  teacher: string
+  uid: string
+  explanation: [Explanation]
+  levels: [Nivel]
+  clues: [string]
+}
+
+class Explanation {
+    text: string
+    uid: string
+}
+
+class Nivel {
+  level: string
+  problem: string
+  options: [Opción]
+  color: string
+  clues: [string]
+}
+
+class Opción {
+  answer: boolean
+  value: string
+}
+
+Lección --> "levels" Nivel
+Nivel --> "options" Opción
+Lección --> "explanation" Explanation

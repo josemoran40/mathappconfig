@@ -58,21 +58,33 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
         <div className="grid grid-cols-2 gap-3">
           {options.map((option, indexOption) => {
             return (
-              <Input
-                key={indexOption}
-                value={option?.value}
-                onChange={(e) =>
-                  updateLevelProperty(
-                    index,
-                    e.target.value,
-                    "options",
-                    indexOption,
-                    "value"
-                  )
-                }
-                placeholder={"Nombre de nivel"}
-                label={`Opción ${index + 1}`}
-              />
+              <div
+                key={indexOption + option.value}
+                className="flex gap-2 items-end"
+              >
+                <Input
+                  value={option?.value}
+                  onChange={(e) =>
+                    updateLevelProperty(
+                      index,
+                      e.target.value,
+                      "options",
+                      indexOption,
+                      "value"
+                    )
+                  }
+                  placeholder={"Nombre de nivel"}
+                  label={`Opción ${index + 1}`}
+                />
+                <div
+                  className={`h-4 w-4 mb-custom-10 rounded-sm  cursor-pointer ${
+                    option.answer ? "bg-green-700" : "bg-red-600"
+                  }`}
+                  onClick={() => {
+                    updateCorrectAnswer(index, indexOption);
+                  }}
+                ></div>
+              </div>
             );
           })}
         </div>
@@ -155,6 +167,15 @@ export function LevelsForm({ levels, setLevels, gap = "gap-4" }) {
 
   const addClue = (index, length) => {
     updateLevelProperty(index, "", "clues", length);
+  };
+
+  const updateCorrectAnswer = (index, indexOption) => {
+    for (const item in levels[index].options) {
+      if (item == indexOption) {
+        console.log(levels[index].options[item].answer);
+        updateLevelProperty(index, 0, "options", indexOption, "answer");
+      }
+    }
   };
 
   return (

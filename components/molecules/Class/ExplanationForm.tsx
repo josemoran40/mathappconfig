@@ -17,7 +17,6 @@ export function ExplanationForm({
   gap = "gap-4",
 }) {
   const DrawExplanationText = ({ text }, index) => {
-    console.log(text);
     const [text_, setText_] = useState(text);
     return (
       <Box
