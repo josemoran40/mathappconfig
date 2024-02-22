@@ -22,9 +22,13 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
-      window.location.replace("/login");
+      const fromLogin = error.config.url.includes('/login');
+      if (!fromLogin) {
+        window.location.replace("/login");
+      }
     }
     return Promise.reject(error);
   }
 );
+
 export default instance;
