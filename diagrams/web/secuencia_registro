@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant Administrador
+    participant InterfazWeb
+    participant Backend
+
+    loop Crear usuario
+        Administrador->>InterfazWeb: Ingresar nombre de usuario, contraseña y rol
+        InterfazWeb->>Backend: Enviar solicitud de creación de usuario
+        Backend-->>InterfazWeb: Procesar solicitud de creación de usuario y enviar respuesta
+        InterfazWeb->>Administrador: Mostrar resultado de la creación de usuario
+    end

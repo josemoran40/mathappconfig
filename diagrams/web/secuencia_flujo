@@ -1,0 +1,32 @@
+sequenceDiagram
+    participant Administrador
+    participant InterfazWeb
+    participant Backend
+
+    loop Solicitar acceso
+        Administrador->>InterfazWeb: Ingresar email y contraseña
+        InterfazWeb->>Backend: Enviar solicitud de acceso
+        Backend-->>InterfazWeb: Procesar solicitud y enviar respuesta
+        InterfazWeb->>Administrador: Interpretar respuesta y mostrar mensaje de error o redireccionar al index
+    end
+
+    loop Editar clase
+        Administrador->>InterfazWeb: Seleccionar clase a editar
+        InterfazWeb->>Backend: Enviar solicitud de edición
+        Backend-->>InterfazWeb: Procesar solicitud de edición y enviar respuesta
+        InterfazWeb->>Administrador: Mostrar resultado de la edición
+    end
+
+    loop Eliminar clase
+        Administrador->>InterfazWeb: Seleccionar clase a eliminar
+        InterfazWeb->>Backend: Enviar solicitud de eliminación
+        Backend-->>InterfazWeb: Procesar solicitud de eliminación y enviar respuesta
+        InterfazWeb->>Administrador: Mostrar resultado de la eliminación
+    end
+
+    loop Crear clase
+        Administrador->>InterfazWeb: Ingresar nombre, explicación y niveles
+        InterfazWeb->>Backend: Enviar solicitud de creación
+        Backend-->>InterfazWeb: Procesar solicitud de creación y enviar respuesta
+        InterfazWeb->>Administrador: Mostrar resultado de la creación
+    end

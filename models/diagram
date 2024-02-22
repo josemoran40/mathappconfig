@@ -1,5 +1,5 @@
 classDiagram
-class Lección {
+class Clase {
   class: string
   teacher: string
   uid: string
@@ -26,6 +26,22 @@ class Opción {
   value: string
 }
 
-Lección --> "levels" Nivel
+Clase --> "levels" Nivel
 Nivel --> "options" Opción
-Lección --> "explanation" Explanation
+Clase --> "explanation" Explanation
+
+
+class Usuario {
+  email: string
+  password: string
+  clases: [Clases]
+}
+
+
+class Clases {
+  score: number
+  level: number
+  uid: string
+}
+
+Usuario --> "clases" Clases

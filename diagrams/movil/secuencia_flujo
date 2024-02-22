@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant UsuarioFinal
+    participant AppMovil
+    participant Backend
+
+    UsuarioFinal->>AppMovil: Ingresar nombre de usuario y contraseña
+    AppMovil->>Backend: Enviar solicitud de login
+    Backend-->>AppMovil: Procesar solicitud de login y enviar respuesta
+    AppMovil-->>UsuarioFinal: Mostrar resultado del login
+
+    UsuarioFinal->>AppMovil: Seleccionar una clase
+    AppMovil->>Backend: Solicitar explicación de la clase seleccionada
+    Backend-->>AppMovil: Enviar explicación de la clase
+    AppMovil-->>UsuarioFinal: Mostrar explicación de la clase
+
+    loop Niveles
+        UsuarioFinal->>AppMovil: Entrar al siguiente nivel
+        AppMovil->>Backend: Solicitar pregunta y respuestas del siguiente nivel
+        Backend-->>AppMovil: Enviar pregunta y respuestas del siguiente nivel
+        AppMovil-->>UsuarioFinal: Mostrar pregunta y respuestas del siguiente nivel
+
+        UsuarioFinal->>AppMovil: Solicitar pista (opcional)
+        AppMovil->>Backend: Enviar solicitud de pista
+        Backend-->>AppMovil: Enviar pista (si está disponible)
+        AppMovil-->>UsuarioFinal: Mostrar pista (si está disponible)
+        
+        UsuarioFinal->>AppMovil: Seleccionar respuesta
+        AppMovil->>Backend: Enviar respuesta seleccionada
+        Backend-->>AppMovil: Procesar respuesta y enviar resultado
+        AppMovil-->>UsuarioFinal: Mostrar resultado de la respuesta
+    end

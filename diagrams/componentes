@@ -1,0 +1,36 @@
+C4Component
+    title Diagrama de componentes para Sistema de Aprendizaje en Línea - Aplicación API
+
+    Container(web, "Aplicación Web", "React.js", "Proporciona la interfaz de usuario para configuración y administración del sistema.")
+    Container(mobile, "Aplicación Móvil", "React Native", "Proporciona una funcionalidad de aprendizaje en línea a los usuarios a través de sus dispositivos móviles.")
+    ContainerDb(db, "Base de Datos", "Esquema de Base de Datos Relacional", "Almacena perfiles de usuario, información de cursos, datos de seguimiento de progreso, etc.")
+
+    Container_Boundary(api, "Aplicación API") {
+        Component(auth, "Controlador de Autenticación", "Controlador de API REST", "Permite a los usuarios autenticarse y gestionar sus cuentas.")
+        Component(classes, "Controlador de Clases", "Controlador de API REST", "Proporciona funcionalidad para acceder y gestionar clases.")
+        Component(levels, "Controlador de Niveles", "Controlador de API REST", "Administra la progresión de niveles dentro de una clase.")
+        Component(users, "Controlador de Usuarios", "Controlador de API REST", "Permite administrar usuarios y sus roles en la plataforma.")
+
+        Rel(auth, classes, "Usa")
+        Rel(classes, levels, "Usa")
+        Rel(levels, users, "Usa")
+        Rel(levels, db, "Lee y escribe en", "Firebase")
+        Rel(users, db, "Lee y escribe en", "Firebase")
+    }
+
+    Rel_Back(web, auth, "Usa", "JSON/HTTPS")
+    Rel(web, classes, "Usa", "JSON/HTTPS")
+
+    Rel(mobile, classes, "Usa", "JSON/HTTPS")
+
+    UpdateRelStyle(web, auth, $offsetY="-40")
+    UpdateRelStyle(web, classes, $offsetX="40", $offsetY="40")
+
+    UpdateRelStyle(mobile, auth, $offsetX="-90", $offsetY="40")
+    UpdateRelStyle(mobile, classes, $offsetY="-40")
+
+    UpdateRelStyle(auth, classes, $offsetX="-160", $offsetY="10")
+    UpdateRelStyle(classes, levels, $offsetX="140", $offsetY="10")
+    UpdateRelStyle(levels, users, $offsetX="140", $offsetY="10")
+    UpdateRelStyle(levels, db, $offsetY="-40")
+    UpdateRelStyle(users, db, $offsetY="-40")

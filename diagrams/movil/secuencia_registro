@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant UsuarioFinal
+    participant AppMovil
+    participant Backend
+
+    UsuarioFinal->>AppMovil: Ingresar nombre de usuario, contraseña y rol
+    AppMovil->>Backend: Enviar solicitud de creación de usuario
+    Backend-->>AppMovil: Procesar solicitud de creación de usuario y enviar respuesta
+    AppMovil-->>UsuarioFinal: Mostrar resultado de la creación de usuario
