@@ -58,7 +58,7 @@ export async function GET(req: NextRequest, res: NextApiResponse) {
 
     const db = await getFirestore();
     const collectionRef = collection(db, "class");
-    const q = query(collectionRef, where("teacher", "==", user.uid));
+    const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
     const result = [];
 

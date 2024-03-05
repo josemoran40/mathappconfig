@@ -1,0 +1,18 @@
+import { LoginForm } from "../../../components/organisms";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import { CreateAccountForm } from "../../../components/organisms/LoginForm/CreateAccount";
+
+export default function Home() {
+  return (
+    <div
+      className={
+        "w-max-screen min-h-screen bg-gray-primary flex flex-col items-center justify-center"
+      }
+    >
+      <CreateAccountForm />
+      <ToastContainer theme="colored" />
+    </div>
+  );
+}

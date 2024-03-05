@@ -29,10 +29,11 @@ export const LoginForm = () => {
 
     return (
         <Container className={"w-full lg:w-custom-485 py-10 px-10 gap-4 flex justify-center flex-col items-center min-h-full"}>
-            <H1>Mathapp Config</H1>
+            <H1>FactorXpert Config</H1>
             <Input onChange={(e) => setEmail(e.target.value)} placeholder={"Correo"} />
             <Input onChange={(e) => setPassword(e.target.value)} placeholder={"Contraseña"} type={"password"} />
             <PrimaryButton onClick={login}>Iniciar sesión</PrimaryButton>
+            <a className="text-black underline text-sm hover:opacity-70" href="/login/create">Crea tu cuenta</a>
         </Container>
     )
 }

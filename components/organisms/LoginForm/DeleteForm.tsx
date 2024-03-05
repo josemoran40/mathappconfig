@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import axios from "../../../axios";
 import { useRouter } from "next/navigation";
 
-export const CreateAccountForm = () => {
+export const DeleteFormAccount = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -13,7 +13,7 @@ export const CreateAccountForm = () => {
   const login = async () => {
     axios
       .post(
-        "/api/login/create",
+        "/api/login/delete",
         { email, password },
         {
           headers: {
@@ -36,7 +36,7 @@ export const CreateAccountForm = () => {
         "w-full lg:w-custom-485 py-10 px-10 gap-4 flex justify-center flex-col items-center min-h-full"
       }
     >
-      <H1>Crea tu cuenta</H1>
+      <H1>Elimina tu cuenta</H1>
       <Input
         onChange={(e) => setEmail(e.target.value)}
         placeholder={"Correo"}
@@ -46,7 +46,7 @@ export const CreateAccountForm = () => {
         placeholder={"Contraseña"}
         type={"password"}
       />
-      <PrimaryButton onClick={login}>Crear cuenta</PrimaryButton>
+      <PrimaryButton onClick={login}>Eliminar</PrimaryButton>
     </Container>
   );
 };
